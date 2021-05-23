@@ -7,7 +7,9 @@ import Signup from "./components/signup/Signup";
 import Login from "./components/login/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import axios from "axios";
+import requireAuth from "./utils/RequireAuth";
 axios.defaults.baseURL = "http://127.0.0.1:8000";
+
 
 class App extends Component {
   render() {
@@ -18,7 +20,7 @@ class App extends Component {
           <Switch>
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
-            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/dashboard" component={requireAuth(Dashboard)} />
             <Route exact path="/" component={Home} />
             <Route path="*">Ups</Route>
           </Switch>
