@@ -6,7 +6,7 @@ class Product extends Component {
     const { product } = this.props;
     return (
       <div>
-        <p>{product.content}</p>
+        <p>{product.id},{product.product_name}</p>
       </div>
     );
   }

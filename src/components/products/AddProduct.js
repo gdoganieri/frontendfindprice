@@ -9,7 +9,9 @@ class AddProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      content: ""
+      product_name: "",
+      category: "",
+      description: ""
     };
   }
   onChange = e => {
@@ -18,7 +20,9 @@ class AddProduct extends Component {
 
   onAddClick = () => {
     const product = {
-      content: this.state.content
+      product_name: this.state.product_name,
+      category: this.state.category,
+      description: this.state.description,
     };
     this.props.addProduct(product);
   };
@@ -29,13 +33,28 @@ class AddProduct extends Component {
         <h2>Add new product</h2>
         <Form>
           <Form.Group controlId="contentId">
-            <Form.Label>Product</Form.Label>
+            <Form.Label>Product Name</Form.Label>
             <Form.Control
-              as="textarea"
-              rows={3}
-              name="content"
-              placeholder="Enter product"
-              value={this.content}
+              type="text"
+              name="product_name"
+              placeholder="Enter product name"
+              value={this.product_name}
+              onChange={this.onChange}
+            />
+            <Form.Label>Product Category</Form.Label>
+            <Form.Control
+              type="text"
+              name="category"
+              placeholder="Enter product category"
+              value={this.category}
+              onChange={this.onChange}
+            />
+            <Form.Label>Product Description</Form.Label>
+            <Form.Control
+              type="text"
+              name="description"
+              placeholder="Enter product description"
+              value={this.description}
               onChange={this.onChange}
             />
           </Form.Group>
