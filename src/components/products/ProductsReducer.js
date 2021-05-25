@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, ADD_PRODUCT } from "./ProductsTypes";
+import { GET_PRODUCTS, ADD_PRODUCT , DELETE_PRODUCT, UPDATE_PRODUCT} from "./ProductsTypes";
 
 const initialState = {
   products: []
@@ -15,6 +15,22 @@ export const productsReducer = (state = initialState, action) => {
       return {
         ...state,
         products: [...state.products, action.payload]
+      };
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        products: state.products.filter((item, index) => item.id !== action.payload)
+      };
+    case UPDATE_PRODUCT:
+      const updatedProducts = state.products.map(item => {
+        if (item.id === action.payload.id) {
+          return { ...item, ...action.payload };
+        }
+        return item;
+      });
+      return {
+        ...state,
+        products: updatedProducts
       };
     default:
       return state;
