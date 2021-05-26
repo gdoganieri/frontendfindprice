@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toastOnError } from "../../utils/Utils";
-import { GET_PRODUCTS, ADD_PRODUCT , DELETE_PRODUCT, UPDATE_PRODUCT} from "./ProductsTypes";
+import { GET_PRODUCTS, ADD_PRODUCT , DELETE_PRODUCT, UPDATE_PRODUCT, GET_CATEGORIES} from "./ProductsTypes";
 
 export const getProducts = () => dispatch => {
   axios
@@ -50,6 +50,20 @@ export const updateProduct = (id, product) => dispatch => {
     .then(response => {
       dispatch({
         type: UPDATE_PRODUCT,
+        payload: response.data
+      });
+    })
+    .catch(error => {
+      toastOnError(error);
+    });
+};
+
+export const getCategories = () => dispatch => {
+  axios
+    .get("/categories")
+    .then(response => {
+      dispatch({
+        type: GET_CATEGORIES,
         payload: response.data
       });
     })

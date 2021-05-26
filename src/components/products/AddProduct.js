@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
-import { addProduct } from "./ProductsActions";
+import {addProduct, getCategories} from "./ProductsActions";
 
 class AddProduct extends Component {
   constructor(props) {
@@ -11,12 +11,18 @@ class AddProduct extends Component {
     this.state = {
       product_name: "",
       category: "",
-      description: ""
+      description: "",
+      options:[],
     };
   }
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+  componentDidMount() {
+    this.props.getCategories()
+    // const { categories } = this.props.options
+    console.log(this.state.options)
+  }
 
   onAddClick = () => {
     const product = {
@@ -48,7 +54,9 @@ class AddProduct extends Component {
               placeholder="Enter product category"
               value={this.category}
               onChange={this.onChange}
-            ><option></option></Form.Control>
+            >
+                { this.state.options.map((option, key) => <option key={key} >{option}</option>) }
+           </Form.Control>
             <Form.Label>Product Description</Form.Label>
             <Form.Control
               type="text"
@@ -68,9 +76,11 @@ class AddProduct extends Component {
 }
 
 AddProduct.propTypes = {
-  addProduct: PropTypes.func.isRequired
+  addProduct: PropTypes.func.isRequired,
+  getCategories : PropTypes.func.isRequired,
+  options : PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({options: state.options});
 
-export default connect(mapStateToProps, { addProduct })(withRouter(AddProduct));
+export default connect(mapStateToProps, { addProduct ,getCategories})(withRouter(AddProduct));
