@@ -6,8 +6,8 @@ import { applyMiddleware, createStore } from "redux";
 import { routerMiddleware, ConnectedRouter } from "connected-react-router";
 
 import rootReducer from "./Reducer";
-import { setCurrentUser, setToken } from "./components/login/LoginActions"; // new imports
-import { isEmpty } from "./utils/Utils"; // new imports
+import { setCurrentUser, setToken } from "./components/login/LoginActions";
+import { isEmpty } from "./utils/Utils";
 
 export default ({ children, initialState = {} }) => {
   const history = createBrowserHistory();

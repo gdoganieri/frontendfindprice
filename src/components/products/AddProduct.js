@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
-import { addProduct } from "./ProductsActions";
+import {addProduct, getCategories} from "./ProductsActions";
 
 class AddProduct extends Component {
   constructor(props) {
@@ -48,7 +48,7 @@ class AddProduct extends Component {
               placeholder="Enter product category"
               value={this.category}
               onChange={this.onChange}
-            ><option></option></Form.Control>
+            ><option onClick={() => this.props.getCategories()}>{}</option></Form.Control>
             <Form.Label>Product Description</Form.Label>
             <Form.Control
               type="text"
@@ -68,9 +68,10 @@ class AddProduct extends Component {
 }
 
 AddProduct.propTypes = {
-  addProduct: PropTypes.func.isRequired
+  addProduct: PropTypes.func.isRequired,
+  getCategories : PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({});
 
-export default connect(mapStateToProps, { addProduct })(withRouter(AddProduct));
+export default connect(mapStateToProps, { addProduct ,getCategories})(withRouter(AddProduct));
