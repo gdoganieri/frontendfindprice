@@ -68,7 +68,7 @@ class AddProduct extends Component {
               value={this.category}
               onChange={this.onChange}
             >
-                { this.state.options.map((option, key) => <option key={key} >{option}</option>) }
+                { this.state.options.map((option, key) => <option key={key} >{option.category}</option>) }
            </Form.Control>
             <Form.Label>Product Description</Form.Label>
             <Form.Control
