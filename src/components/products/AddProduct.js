@@ -4,7 +4,9 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import {addProduct, getCategories} from "./ProductsActions";
+import axios from "axios";
 
+var values;
 class AddProduct extends Component {
   constructor(props) {
     super(props);
@@ -19,9 +21,20 @@ class AddProduct extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
   componentDidMount() {
-    this.props.getCategories()
-    // const { categories } = this.props.options
-    console.log(this.state.options)
+    this.fetchOptions()
+
+  }
+  fetchOptions(){
+    axios
+        .get("/categories")
+        .then((response) => {
+  this.setState({options: response.data},function () {console.log(this.state.options);});
+}, (error) => {
+  console.log(error);
+
+
+});
+
   }
 
   onAddClick = () => {
@@ -78,7 +91,6 @@ class AddProduct extends Component {
 AddProduct.propTypes = {
   addProduct: PropTypes.func.isRequired,
   getCategories : PropTypes.func.isRequired,
-  options : PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({options: state.options});
